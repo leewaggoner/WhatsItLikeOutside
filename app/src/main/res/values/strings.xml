@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Whats It Like Outside</string>
+    <string name="title">WHAT\'S IT LIKE OUTSIDE?</string>
+    <string name="rules">Guess the temperature in Fahrenheit degrees right now at the given locations. There are %d rounds.\n\nGood Luck!</string>
+    <string name="start">Start</string>
+    <string name="game_text">What is the current temperature in Fahrenheit degrees in\n%s?</string>
+    <string name="hooray">Hooray!</string>
+    <string name="sorry">Sorry.</string>
+    <string name="result_text">%s The temperature in %s right now is %d°F.</string>
+    <string name="total_score">Total Score: %d</string>
+    <string name="round_score">Round Score: %d</string>
+    <string name="start_next_round">Start Next Round</string>
+    <string name="next">Next</string>
+    <string name="your_score">YOUR SCORE</string>
+    <string name="high_score">HIGH SCORE</string>
+    <string name="play_again">Play Again</string>
+</resources>
