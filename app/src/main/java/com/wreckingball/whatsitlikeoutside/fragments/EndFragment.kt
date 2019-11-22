@@ -36,7 +36,7 @@ class EndFragment : Fragment(R.layout.end_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        model.calcHighScore(context!!, score)
+        model.calcHighScore(score)
         playAgain.setOnClickListener {
             gameListener.playAgain()
         }
