@@ -20,6 +20,8 @@ object TemperatureRepository {
                 if (response.isSuccessful) {
                     Log.d(TAG, "Network response successful")
                     temperatureResponse.value = response.body()
+                } else {
+                    Log.d(TAG, "Network response unsuccessful: " + response.errorBody())
                 }
             }
             override fun onFailure(call: Call<TemperatureResponse>, t: Throwable) {

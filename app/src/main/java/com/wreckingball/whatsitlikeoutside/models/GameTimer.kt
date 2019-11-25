@@ -8,6 +8,10 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import com.wreckingball.whatsitlikeoutside.R
+import com.wreckingball.whatsitlikeoutside.utils.BEEP
+import com.wreckingball.whatsitlikeoutside.utils.Sounds
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import java.util.concurrent.TimeUnit
 
 private const val TIMER_INTERVAL = 10L
@@ -18,12 +22,13 @@ interface GameTimerListener {
     fun onEndOfRound()
 }
 
-class GameTimer {
+class GameTimer : KoinComponent {
     private lateinit var progressCircle: ProgressBar
     private lateinit var timeView: TextView
     private lateinit var listener: GameTimerListener
     private lateinit var countDownTimer: CountDownTimer
     private var flag = false
+    private val sounds: Sounds by inject()
     var timeLeft = ObservableField("")
 
     fun initialize(context: Context, progressCircle: ProgressBar, timeView: TextView, listener: GameTimerListener) {
@@ -35,8 +40,11 @@ class GameTimer {
             override fun onTick(millisUntilFinished: Long) {
                 progressCircle.progress = (millisUntilFinished / 10).toInt()
                 val time = timeFormatter(millisUntilFinished)
-                if (!timeLeft.equals(time)) {
+                if (!timeLeft.get().equals(time)) {
                     timeLeft.set(time)
+                    if (time.toInt() <= TIME_ALMOST_UP.toInt()) {
+                        sounds.play(BEEP)
+                    }
                 }
                 if (time.equals(TIME_ALMOST_UP, true) && !flag) {
                     flag = true

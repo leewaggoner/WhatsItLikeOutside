@@ -13,5 +13,4 @@ class WhatsItLikeApplication : Application() {
             modules(appModule)
         }
     }
-
 }

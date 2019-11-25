@@ -10,7 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.wreckingball.whatsitlikeoutside.R
 import com.wreckingball.whatsitlikeoutside.networking.TemperatureRepository
+import com.wreckingball.whatsitlikeoutside.utils.LOSER
+import com.wreckingball.whatsitlikeoutside.utils.Sounds
+import com.wreckingball.whatsitlikeoutside.utils.VICTORY
 import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 enum class GameState {
     GAME_START,
@@ -20,7 +24,7 @@ enum class GameState {
 }
 
 const val NO_CHOICE = "no_choice"
-const val MAX_ROUNDS = 2
+const val MAX_ROUNDS = 5
 
 private const val CORRECT_SCORE = 1000
 private const val TAG = "Networking"
@@ -65,6 +69,7 @@ class GameViewModel : ViewModel(), KoinComponent {
     private var roundScore = 0
     private var totalScore = 0
     private var currentRound = 0
+    private val sounds: Sounds by inject()
     var roundText = ObservableField("")
     var totalText = ObservableField("")
     var curRound = ObservableField((currentRound + 1).toString())
@@ -144,6 +149,7 @@ class GameViewModel : ViewModel(), KoinComponent {
         } else {
             0
         }
+        sounds.play(if (roundScore == 0) LOSER else VICTORY)
         currentRound++
         totalScore += roundScore
         gameState.value = GameState.ROUND_END

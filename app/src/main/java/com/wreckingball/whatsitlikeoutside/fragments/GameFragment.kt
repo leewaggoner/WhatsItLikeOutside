@@ -18,12 +18,14 @@ import com.wreckingball.whatsitlikeoutside.R
 import com.wreckingball.whatsitlikeoutside.databinding.GameFragmentBinding
 import com.wreckingball.whatsitlikeoutside.listeners.GameListener
 import com.wreckingball.whatsitlikeoutside.models.*
+import com.wreckingball.whatsitlikeoutside.utils.Sounds
+import com.wreckingball.whatsitlikeoutside.utils.WHOOSH
 import kotlinx.android.synthetic.main.game_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val OFF_SCREEN = 1000f
-const val ANIM_DURATION = 1000L
+const val ANIM_DURATION = 700L
 
 class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
     private var radioPos = 0f
@@ -32,6 +34,7 @@ class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
     private val model : GameViewModel by viewModel()
     private var gameListener: GameListener? = null
     private val gameTimer: GameTimer by inject()
+    private val sounds: Sounds by inject()
     private lateinit var binding: GameFragmentBinding
 
     override fun onAttach(context: Context) {
@@ -45,6 +48,8 @@ class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        sounds.init(context!!)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
         binding.vm = model
         return binding.root
@@ -61,7 +66,7 @@ class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
         radioButtons[1] = radioButton2
         radioButtons[2] = radioButton3
         radioButtons[3] = radioButton4
-        textPos = game_text.x
+        textPos = gameText.x
 
         model.getGameState().observe(this, Observer {
             gameState ->
@@ -87,6 +92,11 @@ class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
         initNewRound()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        sounds.release()
+    }
+
     private fun initNewRound() {
         nextRound.visibility = View.INVISIBLE
         clearRadioButtons()
@@ -108,8 +118,8 @@ class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
         val gameTemp = model.getGameTemperature()
 
         //set up game text
-        game_text.text = String.format(getText(R.string.game_text).toString(), model.getLocation())
-        game_text.visibility = View.VISIBLE
+        gameText.text = String.format(getText(R.string.game_text).toString(), model.getLocation())
+        gameText.visibility = View.VISIBLE
 
         //set up choices
         val gameTemps = gameTemp.getTemps()
@@ -135,6 +145,7 @@ class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
         val anim = ObjectAnimator.ofFloat(radioButton, "translationX", radioPos)
         anim.duration = ANIM_DURATION
         anim.start()
+        sounds.play(WHOOSH)
         anim.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {
             }
@@ -175,7 +186,7 @@ class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
     }
 
     private fun displayRoundEndElements() {
-        slideView(game_text, -OFF_SCREEN) {showResulText()}
+        slideView(gameText, -OFF_SCREEN) {showResulText()}
     }
 
     private fun slideView(view: View, toX: Float, end: () -> Unit) {
@@ -196,9 +207,9 @@ class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
     }
 
     private fun showResulText() {
-        game_text.x = textPos + OFF_SCREEN
-        game_text.text = model.getResultText(context!!)
-        slideView(game_text, textPos) {showCorrectAnswer()}
+        gameText.x = textPos + OFF_SCREEN
+        gameText.text = model.getResultText(context!!)
+        slideView(gameText, textPos) {showCorrectAnswer()}
     }
 
     private fun showCorrectAnswer() {

@@ -3,7 +3,7 @@
     <string name="title">WHAT\'S IT LIKE OUTSIDE?</string>
     <string name="rules">Guess the temperature in Fahrenheit degrees right now at the given locations. There are %d rounds.\n\nGood Luck!</string>
     <string name="start">Start</string>
-    <string name="game_text">What is the current temperature in Fahrenheit degrees in\n%s?</string>
+    <string name="game_text">What is the current temperature in Fahrenheit degrees in %s?</string>
     <string name="hooray">Hooray!</string>
     <string name="sorry">Sorry.</string>
     <string name="result_text">%s The temperature in %s right now is %d°F.</string>

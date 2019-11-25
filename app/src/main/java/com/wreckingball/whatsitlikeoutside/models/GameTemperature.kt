@@ -5,7 +5,7 @@ import kotlin.random.Random
 class GameTemperature(private val location : String, private val realTemp: Int) {
     private var temps = mutableListOf<Int>()
     init {
-        var collection = mutableListOf<Int>()
+        val collection = mutableListOf<Int>()
         val random = Random(System.currentTimeMillis())
         collection.add(realTemp + random.nextInt(1, 3))
         collection.add(realTemp + random.nextInt(4, 7))

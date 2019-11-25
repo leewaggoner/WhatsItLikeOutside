@@ -7,16 +7,14 @@ import com.wreckingball.whatsitlikeoutside.models.EndViewModel
 import com.wreckingball.whatsitlikeoutside.models.GameTimer
 import com.wreckingball.whatsitlikeoutside.models.GameViewModel
 import com.wreckingball.whatsitlikeoutside.utils.PreferencesWrapper
+import com.wreckingball.whatsitlikeoutside.utils.Sounds
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module(override = true) {
-    single { PreferencesWrapper(
-        getSharedPrefs(
-            androidContext()
-        )
-    ) }
+    single { Sounds() }
+    single { PreferencesWrapper(getSharedPrefs(androidContext())) }
     factory { GameTimer() }
     viewModel { EndViewModel() }
     viewModel { GameViewModel() }
