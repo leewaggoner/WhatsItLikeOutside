@@ -1,0 +1,136 @@
+{
+  "cities":[
+    {
+      "weatherName":"Tacoma,US",
+      "location":"Tacoma, Washington"
+    },
+    {
+      "weatherName":"Seattle,US",
+      "location":"Seattle Washington"
+    },
+    {
+      "weatherName":"San Francisco,US",
+      "location":"San Francisco, California"
+    },
+    {
+      "weatherName":"San Diego,US",
+      "location":"San Diego, California"
+    },
+    {
+      "weatherName":"Moscow,RU",
+      "location":"Moscow, Russia"
+    },
+    {
+      "weatherName":"Helsinki,FI",
+      "location":"Helsinki, Finland"
+    },
+    {
+      "weatherName":"Reykjavik,IS",
+      "location":"Reykjavik, Iceland"
+    },
+    {
+      "weatherName":"Berlin,DE",
+      "location":"Berlin, Germany"
+    },
+    {
+      "weatherName":"Paris,FR",
+      "location":"Paris, France"
+    },
+    {
+      "weatherName":"London.GB",
+      "location":"London, England"
+    },
+    {
+      "weatherName":"Sao Paulo,BR",
+      "location":"Sao Paulo, Brazil"
+    },
+    {
+      "weatherName":"Bogota,CO",
+      "location":"Bogota, Columbia"
+    },
+    {
+      "weatherName":"Denver,US",
+      "location":"Denver, Colorado"
+    },
+    {
+      "weatherName":"Nashville,US",
+      "location":"Nashville, Tennessee"
+    },
+    {
+      "weatherName":"Atlanta,US",
+      "location":"Atlanta, Georgia"
+    },
+    {
+      "weatherName":"Miami,US",
+      "location":"Miami, Florida"
+    },
+    {
+      "weatherName":"Honolulu,US",
+      "location":"Honolulu, Hawaii"
+    },
+    {
+      "weatherName":"Beijing,CN",
+      "location":"Beijing, China"
+    },
+    {
+      "weatherName":"Tokyo,JP",
+      "location":"Tokyo, Japan"
+    },
+    {
+      "weatherName":"Singapore,SG",
+      "location":"Singapore, Singapore"
+    },
+    {
+      "weatherName":"Jakarta,ID",
+      "location":"Jakarta, Indonesia"
+    },
+    {
+      "weatherName":"Phnom Penh,KH",
+      "location":"Phnom Penh, Cambodia"
+    },
+    {
+      "weatherName":"New Delhi,IN",
+      "location":"New Delhi, India"
+    },
+    {
+      "weatherName":"Agra,IN",
+      "location":"Agra, India"
+    },
+    {
+      "weatherName":"Islamabad,PK",
+      "location":"Islamabad, Pakistan"
+    },
+    {
+      "weatherName":"Istanbul,TR",
+      "location":"Istanbul, Turkey"
+    },
+    {
+      "weatherName":"Oslo,NO",
+      "location":"Oslo, Norway"
+    },
+    {
+      "weatherName":"Delft,NL",
+      "location":"Delft, Netherlands"
+    },
+    {
+      "weatherName":"Amsterdam,NL",
+      "location":"Amsterdam, Netherlands"
+    },
+    {
+      "weatherName":"New York,US",
+      "location":"New York, New York"
+    },
+    {
+      "weatherName":"Philadelphia,US",
+      "location":"Philadelphia, Pennsylvania"
+    },
+    {
+      "weatherName":"Dallas,US",
+      "location":"Dallas, Texas"
+    },
+    {
+      "weatherName":"Fairbanks,US",
+      "location":"Fairbanks, Alaska"
+    }
+  ]
+}

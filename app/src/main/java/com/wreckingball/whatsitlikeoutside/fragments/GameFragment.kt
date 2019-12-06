@@ -17,9 +17,13 @@ import androidx.lifecycle.Observer
 import com.wreckingball.whatsitlikeoutside.R
 import com.wreckingball.whatsitlikeoutside.databinding.GameFragmentBinding
 import com.wreckingball.whatsitlikeoutside.listeners.GameListener
-import com.wreckingball.whatsitlikeoutside.models.*
+import com.wreckingball.whatsitlikeoutside.models.GameState
+import com.wreckingball.whatsitlikeoutside.models.GameViewModel
+import com.wreckingball.whatsitlikeoutside.models.NO_CHOICE
 import com.wreckingball.whatsitlikeoutside.utils.Sounds
 import com.wreckingball.whatsitlikeoutside.utils.WHOOSH
+import com.wreckingball.whatsitlikeoutside.widgets.GameTimer
+import com.wreckingball.whatsitlikeoutside.widgets.GameTimerListener
 import kotlinx.android.synthetic.main.game_fragment.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,7 +31,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 const val OFF_SCREEN = 1000f
 const val ANIM_DURATION = 700L
 
-class GameFragment : Fragment(R.layout.game_fragment), GameTimerListener {
+class GameFragment : Fragment(R.layout.game_fragment),
+    GameTimerListener {
     private var radioPos = 0f
     private val radioButtons = arrayOfNulls<RadioButton>(4)
     private var textPos = 0f

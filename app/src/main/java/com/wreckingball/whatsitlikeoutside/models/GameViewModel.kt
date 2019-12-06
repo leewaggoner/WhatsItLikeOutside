@@ -1,15 +1,19 @@
 package com.wreckingball.whatsitlikeoutside.models
 
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import com.wreckingball.whatsitlikeoutside.R
-import com.wreckingball.whatsitlikeoutside.networking.TemperatureRepository
+import com.wreckingball.whatsitlikeoutside.data.CityRepository
+import com.wreckingball.whatsitlikeoutside.data.GameTemperature
+import com.wreckingball.whatsitlikeoutside.data.TemperatureRepository
+import com.wreckingball.whatsitlikeoutside.data.TemperatureResponse
 import com.wreckingball.whatsitlikeoutside.utils.LOSER
 import com.wreckingball.whatsitlikeoutside.utils.Sounds
 import com.wreckingball.whatsitlikeoutside.utils.VICTORY
@@ -29,40 +33,9 @@ const val MAX_ROUNDS = 5
 private const val CORRECT_SCORE = 1000
 private const val TAG = "Networking"
 
-class GameViewModel : ViewModel(), KoinComponent {
-    private var cities = mutableListOf(City("Tacoma,US", "Tacoma, Washington"),
-        City("Seattle,US", "Seattle Washington"),
-        City("San Francisco,US", "San Francisco, California"),
-        City("San Diego,US", "San Diego, California"),
-        City("Moscow,RU", "Moscow, Russia"),
-        City("Helsinki,FI", "Helsinki, Finland"),
-        City("Reykjavik,IS", "Reykjavik, Iceland"),
-        City("Berlin,DE", "Berlin, Germany"),
-        City("Paris,FR", "Paris, France"),
-        City("London.GB", "London, England"),
-        City("Sao Paulo,BR", "Sao Paulo, Brazil"),
-        City("Bogota,CO", "Bogota, Columbia"),
-        City("Denver,US", "Denver, Colorado"),
-        City("Nashville,US", "Nashville, Tennessee"),
-        City("Atlanta,US", "Atlanta, Georgia"),
-        City("Miami,US", "Miami, Florida"),
-        City("Honolulu,US", "Honolulu, Hawaii"),
-        City("Beijing,CN", "Beijing, China"),
-        City("Tokyo,JP", "Tokyo, Japan"),
-        City("Singapore,SG", "Singapore, Singapore"),
-        City("Jakarta,ID", "Jakarta, Indonesia"),
-        City("Phnom Penh,KH", "Phnom Penh, Cambodia"),
-        City("New Delhi,IN", "New Delhi, India"),
-        City("Agra,IN", "Agra, India"),
-        City("Islamabad,PK", "Islamabad, Pakistan"),
-        City("Istanbul,TR", "Istanbul, Turkey"),
-        City("Oslo,NO", "Oslo, Norway"),
-        City("Delft,NL", "Delft, Netherlands"),
-        City("Amsterdam,NL", "Amsterdam, Netherlands"),
-        City("New York,US", "New York, New York"),
-        City("Philadelphia,US", "Philadelphia, Pennsylvania"),
-        City("Dallas,US", "Dallas, Texas"),
-        City("Fairbanks,US", "Fairbanks, Alaska"))
+class GameViewModel(val cityRepository: CityRepository, application: Application) :
+        AndroidViewModel(application), KoinComponent {
+    private var cities = cityRepository.getCities()
     private var gameState = MutableLiveData<GameState>()
     private var temperatureData = MutableLiveData<TemperatureResponse>()
     private lateinit var gameTemperature: GameTemperature
@@ -77,11 +50,10 @@ class GameViewModel : ViewModel(), KoinComponent {
     init {
         //set initial game state
         gameState.value = GameState.GAME_START
-        cities.shuffle()
     }
 
     private fun restartGame() {
-        cities.shuffle()
+        cities = cityRepository.getCities()
         roundScore = 0
         totalScore = 0
         currentRound = 0
@@ -134,11 +106,16 @@ class GameViewModel : ViewModel(), KoinComponent {
         val realTemp = realTempD?.toInt()
         name?.let {
             realTemp?.let {
-                gameTemperature = GameTemperature(name, realTemp)
+                gameTemperature =
+                    GameTemperature(
+                        name,
+                        realTemp
+                    )
                 return gameTemperature
             }
         }
-        gameTemperature = GameTemperature("Error", 0)
+        gameTemperature =
+            GameTemperature("Error", 0)
         return gameTemperature
     }
 

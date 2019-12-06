@@ -1,4 +1,4 @@
-package com.wreckingball.whatsitlikeoutside.models
+package com.wreckingball.whatsitlikeoutside.data
 
 class TemperatureResponse(val name: String?, val main : MainResponse?)
 

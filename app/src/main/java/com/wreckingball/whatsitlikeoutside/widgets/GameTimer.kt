@@ -1,4 +1,4 @@
-package com.wreckingball.whatsitlikeoutside.models
+package com.wreckingball.whatsitlikeoutside.widgets
 
 import android.content.Context
 import android.os.CountDownTimer
@@ -36,7 +36,10 @@ class GameTimer : KoinComponent {
         this.timeView = timeView
         this.listener = listener
 
-        countDownTimer = object : CountDownTimer(MAX_TIME, TIMER_INTERVAL) {
+        countDownTimer = object : CountDownTimer(
+            MAX_TIME,
+            TIMER_INTERVAL
+        ) {
             override fun onTick(millisUntilFinished: Long) {
                 progressCircle.progress = (millisUntilFinished / 10).toInt()
                 val time = timeFormatter(millisUntilFinished)

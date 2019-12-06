@@ -5,7 +5,7 @@
     <data>
         <variable
             name="timeData"
-            type="com.wreckingball.whatsitlikeoutside.models.GameTimer" />
+            type="com.wreckingball.whatsitlikeoutside.widgets.GameTimer" />
         <variable
             name="vm"
             type="com.wreckingball.whatsitlikeoutside.models.GameViewModel" />

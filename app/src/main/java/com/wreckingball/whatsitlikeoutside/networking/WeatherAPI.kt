@@ -1,6 +1,6 @@
 package com.wreckingball.whatsitlikeoutside.networking
 
-import com.wreckingball.whatsitlikeoutside.models.TemperatureResponse
+import com.wreckingball.whatsitlikeoutside.data.TemperatureResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

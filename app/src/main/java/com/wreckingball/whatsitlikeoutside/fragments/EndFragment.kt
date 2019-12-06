@@ -40,5 +40,6 @@ class EndFragment : Fragment(R.layout.end_fragment) {
         playAgain.setOnClickListener {
             gameListener.playAgain()
         }
+        model.getCities(context!!)
     }
 }
