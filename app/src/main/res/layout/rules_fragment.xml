@@ -24,6 +24,8 @@
         android:id="@+id/rules_text"
         android:layout_width="360dp"
         android:layout_height="170dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:gravity="center"
         android:text="@string/rules"
         android:textColor="@color/white"
